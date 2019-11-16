@@ -57,3 +57,7 @@ drwxr-xr-x    2 root     root          4096 Oct 25 15:30 .
 drwxr-xr-x    1 root     root          4096 Oct 25 15:30 ..  
 -rwxr-xr-x    1 root     root       3502600 Oct 25 15:30 out  
 This is Java App: Hello World  
+
+Possible issues:
+- folder not shared, check security
+- reset credentials
