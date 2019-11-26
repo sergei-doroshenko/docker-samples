@@ -1,4 +1,7 @@
-package main.java.org.sdoroshenko;
+package org.sdoroshenko;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -29,5 +32,20 @@ public class SeleniumResource {
 
         String result = "@Produces(\"application/xml\") Output: \n\nC to F Converter Output: \n\n" + fahrenheit;
         return "<ctofservice>" + "<celsius>" + celsius + "</celsius>" + "<ctofoutput>" + result + "</ctofoutput>" + "</ctofservice>";
+    }
+
+    @Path("/selenium")
+    @GET
+    public void runSelenium() {
+        String chromePath = "/opt/google/chrome/chrome";
+        System.setProperty("webdriver.chrome.driver", chromePath);
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--hide-scrollbars");
+        options.addArguments("--no-sandbox");
+        ChromeDriver driver = new ChromeDriver(options);
+        driver.get("http://test.com/");
+        driver.close();
     }
 }
