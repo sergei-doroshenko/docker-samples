@@ -6,4 +6,9 @@ https://stackoverflow.com/questions/53576163/interpreting-jemaloc-data-possible-
 ./profiler.sh -d <duration> -e mprotect -f mprotect.svg <pid>  
 ./profiler.sh -d <duration> -e mmap -f mmap.svg <pid>
 
+mvn package
+java -jar target\async-profiler-project-0.0.1-SNAPSHOT.jar
+
+mvn spring-boot:run
+
 http://localhost:8080/images/1001 

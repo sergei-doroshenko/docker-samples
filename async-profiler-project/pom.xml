@@ -11,6 +11,7 @@
 	<groupId>org.sdoroshenko</groupId>
 	<artifactId>async-profiler-project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>async-profiler-project</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -42,6 +43,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>org.sdoroshenko.asyncprofilerproject.AsyncProfilerProjectApplication</mainClass>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
