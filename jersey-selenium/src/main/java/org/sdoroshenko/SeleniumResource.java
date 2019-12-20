@@ -37,13 +37,14 @@ public class SeleniumResource {
     @Path("/selenium")
     @GET
     public void runSelenium() {
-        String chromePath = "/opt/google/chrome/chrome";
+        String chromePath = "/opt/google/chrome/google-chrome";
         System.setProperty("webdriver.chrome.driver", chromePath);
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("--disable-gpu");
         options.addArguments("--hide-scrollbars");
         options.addArguments("--no-sandbox");
+        System.out.println(options);
         ChromeDriver driver = new ChromeDriver(options);
         driver.get("http://test.com/");
         driver.close();

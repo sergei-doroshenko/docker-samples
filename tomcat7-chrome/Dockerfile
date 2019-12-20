@@ -11,6 +11,7 @@ RUN find / -name "chrome"
 
 ENV PATH "$PATH:/opt/google/chrome/chrome"
 RUN echo $PATH
+RUN google-chrome --version
 
 VOLUME /project
 WORKDIR /project

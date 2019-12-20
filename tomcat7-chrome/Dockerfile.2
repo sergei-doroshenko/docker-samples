@@ -1,0 +1,45 @@
+# docker build -t sdoroshenko/tomcat7-chrome .
+# docker image rm -f sdoroshenko/tomcat7-chrome
+# docker run -it --rm -v c:/Users/Sergei_Doroshenko/IdeaProjects/docker-samples/tomcat7-chrome/project:/project sdoroshenko/tomcat7-chrome
+#
+FROM tomcat:7.0.93-jre8
+
+# Install utilities
+RUN apt-get update --fix-missing && apt-get -y upgrade
+
+# Install latest chrome dev package.
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
+    && apt-get update \
+    && apt-get install -y google-chrome-unstable --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /src/*.deb
+
+ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 /usr/local/bin/dumb-init
+RUN chmod +x /usr/local/bin/dumb-init
+COPY project/google-chrome /usr/bin/google-chrome
+# Add a chrome user and setup home dir.
+#RUN groupadd --system chrome && \
+#    useradd --system --create-home --gid chrome --groups audio,video chrome && \
+#    mkdir --parents /home/chrome/reports && \
+#    chown --recursive chrome:chrome /home/chrome /usr/local
+#
+#USER chrome
+
+# Add a user for running applications.
+#RUN useradd apps
+#RUN mkdir -p /home/apps && chown apps:apps /home/apps
+
+#RUN find / -name "chrome"
+
+#ENV PATH "$PATH:/opt/google/chrome/chrome"
+ENV PATH "$PATH:/opt/google/chrome-unstable"
+RUN echo $PATH
+RUN google-chrome-unstable --version
+
+VOLUME /project
+WORKDIR /project
+
+EXPOSE 8080
+
+CMD bash
